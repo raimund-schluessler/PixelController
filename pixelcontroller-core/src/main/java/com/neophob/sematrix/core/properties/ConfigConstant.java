@@ -111,6 +111,13 @@ public final class ConfigConstant {
 	
 	public static final String PIXELINVADERS_IS_AN_EXPEDITINVADER = "pixelinvaders.is.a.expeditinvader";
 
+	/** The Constant Tinkerforge LED Strip*/
+	public static final String TINKERFORGE_HOST = "tinkerforge.host";
+	public static final String TINKERFORGE_PORT = "tinkerforge.port";
+	public static final String TINKERFORGE_UID = "tinkerforge.uid";
+	public static final String TINKERFORGE_ROW1 = "tinkerforge.devices.row1";
+	public static final String TINKERFORGE_ROW2 = "tinkerforge.devices.row2";
+
 	/** The Constant STEALTH_ROW1. */
 	public static final String STEALTH_ROW1 = "stealth.layout.row1";
 	

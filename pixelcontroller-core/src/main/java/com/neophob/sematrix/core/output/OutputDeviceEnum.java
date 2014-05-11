@@ -55,6 +55,9 @@ public enum OutputDeviceEnum {
 	
 	PIXELINVADERS_NET(PixelInvadersNetDevice.class, true),
 
+	/** The Tinkerforge. */
+	TINKERFORGE(TinkerforgeDevice.class, true),
+
 	/** The NULL Output. */
 	NULL(NullDevice.class, true);
 	

@@ -114,6 +114,10 @@ public class ApplicationConfigurationHelper {
 
     private String pixelinvadersNetIp;
     private int pixelinvadersNetPort;
+
+    private String tinkerforgeIp;
+    private int tinkerforgePort;
+    private String tinkerforgeUid;
     
     /**
      * Instantiates a new properties helper.
@@ -134,7 +138,8 @@ public class ApplicationConfigurationHelper {
         int miniDmxDevices = parseMiniDmxDevices();
         int tpm2Devices = parseTpm2Devices();
         int tpm2NetDevices = parseTpm2NetDevices();                
-        int udpDevices = parseUdpDevices();       
+        int udpDevices = parseUdpDevices();
+        int tinkerforgeDevices = parseTinkerforgeDevices();
         //track how many output systems are enabled
         int enabledOutputs = 0;
 
@@ -206,6 +211,12 @@ public class ApplicationConfigurationHelper {
             totalDevices = udpDevices;
             LOG.log(Level.INFO, "found UDP device: "+totalDevices);
             this.outputDeviceEnum = OutputDeviceEnum.UDP;
+        }       
+        if (tinkerforgeDevices > 0) {
+            enabledOutputs++;
+            totalDevices = tinkerforgeDevices;
+            LOG.log(Level.INFO, "found Tinkerforge device: "+totalDevices);
+            this.outputDeviceEnum = OutputDeviceEnum.TINKERFORGE;
         } 
         if (nullDevices > 0) {
             //enable null output only if configured AND no other output is enabled.
@@ -696,6 +707,33 @@ public class ApplicationConfigurationHelper {
     }
 
     /**
+     * get configured tinkerforge ip.
+     *
+     * @return the tinkerforge ip
+     */
+    public String getTinkerforgeIp() {
+        return tinkerforgeIp;
+    }
+
+    /**
+     * get configured tinkerforge port.
+     *
+     * @return the tinkerforge port
+     */
+    public int getTinkerforgePort() {
+        return tinkerforgePort;
+    }
+
+    /**
+     * get configured tinkerforge uid.
+     *
+     * @return the tinkerforge uid
+     */
+    public String getTinkerforgeUid() {
+        return tinkerforgeUid;
+    }
+
+    /**
      * get configured e131 ip.
      *
      * @return the e131 controller ip
@@ -890,6 +928,33 @@ public class ApplicationConfigurationHelper {
             this.devicesInRow2=0;
             this.deviceXResolution = parseOutputXResolution();
             this.deviceYResolution = parseOutputYResolution();
+            return 1;
+        }
+
+        return 0;
+    }
+
+    /**
+     * 
+     * @return
+     */
+    private int parseTinkerforgeDevices() {             
+        // if (StringUtils.length(getTfIp())>0 && parseOutputXResolution()>0 && parseOutputYResolution()>0) {
+        int row1=parseInt(ConfigConstant.TINKERFORGE_ROW1);
+        int row2=parseInt(ConfigConstant.TINKERFORGE_ROW2);
+        // if (row1+row2>0) {
+        //     devicesInRow1 = row1;
+        //     devicesInRow2 = row2;
+        if (row1+row2>0) {
+            this.devicesInRow1=row1;
+            this.devicesInRow2=row2;
+            this.deviceXResolution = parseOutputXResolution();
+            this.deviceYResolution = parseOutputYResolution();
+            String tmp = config.getProperty(ConfigConstant.TINKERFORGE_HOST);
+            this.tinkerforgeIp = StringUtils.strip(tmp);
+            this.tinkerforgePort = parseInt(ConfigConstant.TINKERFORGE_PORT);
+            tmp = config.getProperty(ConfigConstant.TINKERFORGE_UID);
+            this.tinkerforgeUid = StringUtils.strip(tmp);
             return 1;
         }
 

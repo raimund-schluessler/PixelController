@@ -1,0 +1,9 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "pixelcontroller-core\\src\\main\\java\\com\\neophob\\sematrix\\core"
+		}
+	]
+}

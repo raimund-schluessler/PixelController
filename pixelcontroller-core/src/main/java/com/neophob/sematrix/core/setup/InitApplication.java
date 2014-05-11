@@ -43,6 +43,7 @@ import com.neophob.sematrix.core.output.RainbowduinoV3Device;
 import com.neophob.sematrix.core.output.StealthDevice;
 import com.neophob.sematrix.core.output.Tpm2;
 import com.neophob.sematrix.core.output.Tpm2Net;
+import com.neophob.sematrix.core.output.TinkerforgeDevice;
 import com.neophob.sematrix.core.output.UdpDevice;
 import com.neophob.sematrix.core.properties.ApplicationConfigurationHelper;
 
@@ -141,6 +142,9 @@ public abstract class InitApplication {
 				break;
 			case TPM2NET:
 				output = new Tpm2Net(applicationConfig);                
+				break;
+			case TINKERFORGE:
+				output = new TinkerforgeDevice(applicationConfig);                
 				break;
 			default:
 				throw new IllegalArgumentException("Unable to initialize unknown output device: " + outputDeviceEnum);
