@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2013-2014 Matthias Bolte <matthias@tinkerforge.com>
+ * Copyright (C) 2014 Matthias Bolte <matthias@tinkerforge.com>
  *
  * Redistribution and use in source and binary forms of this file,
  * with or without modification, are permitted. See the Creative
@@ -8,21 +8,21 @@
 
 package com.neophob.sematrix.core.output.tinkerforge;
 
-public class TinkerforgeException extends Exception {
+public class CryptoException extends TinkerforgeException {
 	private static final long serialVersionUID = 1L;
 
-	TinkerforgeException() {
+	CryptoException() {
 	}
 
-	TinkerforgeException(String message) {
+	CryptoException(String message) {
 		super(message);
 	}
 
-	TinkerforgeException(String message, Throwable cause) {
+	CryptoException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
-	TinkerforgeException(Throwable cause) {
+	CryptoException(Throwable cause) {
 		super(cause);
 	}
 }

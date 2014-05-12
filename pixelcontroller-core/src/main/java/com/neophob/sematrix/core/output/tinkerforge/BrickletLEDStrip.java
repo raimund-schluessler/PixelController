@@ -1,7 +1,7 @@
 /* ***********************************************************
- * This file was automatically generated on 2013-12-19.      *
+ * This file was automatically generated on 2014-04-09.      *
  *                                                           *
- * Bindings Version 2.0.14                                    *
+ * Bindings Version 2.1.0                                    *
  *                                                           *
  * If you have a bugfix for this file and want to commit it, *
  * please fix the bug in the generator. You can find a link  *
@@ -55,7 +55,7 @@ public class BrickletLEDStrip extends Device {
 	 * 
 	 * For an explanation of the general approach see {@link BrickletLEDStrip#setRGBValues(int, short, short[], short[], short[])}.
 	 */
-	public interface FrameRenderedListener {
+	public interface FrameRenderedListener extends DeviceListener {
 		public void frameRendered(int length);
 	}
 
@@ -79,7 +79,7 @@ public class BrickletLEDStrip extends Device {
 		responseExpected[IPConnection.unsignedByte(FUNCTION_GET_IDENTITY)] = RESPONSE_EXPECTED_FLAG_ALWAYS_TRUE;
 		responseExpected[IPConnection.unsignedByte(CALLBACK_FRAME_RENDERED)] = RESPONSE_EXPECTED_FLAG_ALWAYS_FALSE;
 
-		callbacks[CALLBACK_FRAME_RENDERED] = new CallbackListener() {
+		callbacks[CALLBACK_FRAME_RENDERED] = new IPConnection.DeviceCallbackListener() {
 			public void callback(byte[] data) {
 				ByteBuffer bb = ByteBuffer.wrap(data, 8, data.length - 8);
 				bb.order(ByteOrder.LITTLE_ENDIAN);
@@ -110,6 +110,8 @@ public class BrickletLEDStrip extends Device {
 	 * 
 	 * the LED with index 5 will be red, 6 will be green and 7 will be blue.
 	 * 
+	 * \note Depending on the LED circuitry colors can be permuted.
+	 * 
 	 * The colors will be transfered to actual LEDs when the next
 	 * frame duration ends, see {@link BrickletLEDStrip#setFrameDuration(int)}.
 	 * 
@@ -127,7 +129,7 @@ public class BrickletLEDStrip extends Device {
 	 * a fixed frame rate.
 	 * 
 	 * The actual number of controllable LEDs depends on the number of free
-	 * Bricklet ports. See :ref:`here <led_strip_bricklet_ram_constraints>` for more
+	 * Bricklet ports. See :ref:`here &lt;led_strip_bricklet_ram_constraints&gt;` for more
 	 * information. A call of {@link BrickletLEDStrip#setRGBValues(int, short, short[], short[], short[])} with index + length above the
 	 * bounds is ignored completely.
 	 */
@@ -285,11 +287,10 @@ public class BrickletLEDStrip extends Device {
 	 * the position, the hardware and firmware version as well as the
 	 * device identifier.
 	 * 
-	 * The position can be 'a', 'b', 'c' or 'd'.
+	 * The position can be &apos;a&apos;, &apos;b&apos;, &apos;c&apos; or &apos;d&apos;.
 	 * 
-	 * The device identifiers can be found :ref:`here <device_identifier>`.
-	 * 
-	 * .. versionadded:: 2.0.0~(Plugin)
+	 * The device identifier numbers can be found :ref:`here &lt;device_identifier&gt;`.
+	 * |device_identifier_constant|
 	 */
 	public Identity getIdentity() throws TimeoutException, NotConnectedException {
 		ByteBuffer bb = ipcon.createRequestPacket((byte)8, FUNCTION_GET_IDENTITY, this);
